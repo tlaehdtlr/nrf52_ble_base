@@ -51,6 +51,7 @@
  * with 'YOUR_JOB' indicates where and how you can customize.
  */
 
+#include "main.h"
 #include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
@@ -78,10 +79,9 @@
 #include "nrf_ble_qwr.h"
 #include "nrf_pwr_mgmt.h"
 
+#include "mmi.h"
 #include "nrf_log.h"
 #include "nrf_log_ctrl.h"
-#include "nrf_log_default_backends.h"
-
 
 #define DEVICE_NAME                     "Nordic_Template"                       /**< Name of device. Will be included in the advertising data. */
 #define MANUFACTURER_NAME               "NordicSemiconductor"                   /**< Manufacturer. Will be passed to Device Information Service. */
@@ -645,17 +645,6 @@ static void buttons_leds_init(bool * p_erase_bonds)
     APP_ERROR_CHECK(err_code);
 
     *p_erase_bonds = (startup_event == BSP_EVENT_CLEAR_BONDING_DATA);
-}
-
-
-/**@brief Function for initializing the nrf log module.
- */
-static void log_init(void)
-{
-    ret_code_t err_code = NRF_LOG_INIT(NULL);
-    APP_ERROR_CHECK(err_code);
-
-    NRF_LOG_DEFAULT_BACKENDS_INIT();
 }
 
 
