@@ -102,6 +102,7 @@
       <file file_name="../config/sdk_config.h" />
       <file file_name="../../src/mmi.c" />
       <file file_name="../../src/base_ble_timer.c" />
+      <file file_name="../../src/mmi_hw.c" />
 
     </folder>
     <folder Name="nRF_Segger_RTT">
