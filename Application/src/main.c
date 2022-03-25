@@ -82,7 +82,7 @@
 #include "nrf_log.h"
 #include "nrf_log_ctrl.h"
 
-#include "base_ble_timer.h"
+#include "base_timer.h"
 #include "app_timer.h"
 
 #include "mmi_hw.h"
