@@ -104,6 +104,7 @@
       <file file_name="../../src/base_timer.c" />
       <file file_name="../../src/mmi_hw.c" />
       <file file_name="../../src/base_ble.c" />
+      <file file_name="../../src/base_gap.c" />
 
     </folder>
     <folder Name="nRF_Segger_RTT">
