@@ -105,6 +105,7 @@
       <file file_name="../../src/mmi_hw.c" />
       <file file_name="../../src/base_ble.c" />
       <file file_name="../../src/base_gap.c" />
+      <file file_name="../../src/base_gatt.c" />
 
     </folder>
     <folder Name="nRF_Segger_RTT">
