@@ -1,18 +1,19 @@
 #include "mmi_hw.h"
-#include "bsp_btn_ble.h"
-
+/*
+    if want to use button, see nrf_drv_gpiote.h
+    if want to use led, see nrf_gpio.h
+*/
 
 /**@brief Function for handling events from the BSP module.
  *
  * @param[in]   event   Event generated when button is pressed.
  */
+#if 0
 static void bsp_event_handler(bsp_event_t event)
 {
     ret_code_t err_code;
-
     switch (event)
     {
-#if MODULARIZATION_COMPLETE
         case BSP_EVENT_SLEEP:
             sleep_mode_enter();
             break; // BSP_EVENT_SLEEP
@@ -36,27 +37,27 @@ static void bsp_event_handler(bsp_event_t event)
                 }
             }
             break; // BSP_EVENT_KEY_0
-#endif
         default:
             break;
     }
 }
+#endif
 
 
 /**@brief Function for initializing buttons and leds.
  *
  * @param[out] p_erase_bonds  Will be true if the clear bonding button was pressed to wake the application up.
  */
-void buttons_leds_init(bool * p_erase_bonds)
+void buttons_leds_init(void)
 {
+#if 0
     ret_code_t err_code;
     bsp_event_t startup_event;
-#if 0
     err_code = bsp_init(BSP_INIT_LEDS | BSP_INIT_BUTTONS, bsp_event_handler);
     APP_ERROR_CHECK(err_code);
 
     err_code = bsp_btn_ble_init(NULL, &startup_event);
     APP_ERROR_CHECK(err_code);
-#endif
     *p_erase_bonds = (startup_event == BSP_EVENT_CLEAR_BONDING_DATA);
+#endif
 }
