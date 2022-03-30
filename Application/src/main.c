@@ -64,6 +64,7 @@
 #include "nrf_log.h"
 #include "nrf_log_ctrl.h"
 #include "mmi_hw.h"
+#include "base_timer.h"
 #include "base_ble.h"
 #include "base_gap.h"
 #include "base_gatt.h"
@@ -76,7 +77,6 @@
 #include "nrf_sdh_ble.h"
 #include "fds.h"
 #include "sensorsim.h"
-#include "base_timer.h"
 #include "app_timer.h"
 #include "bsp_btn_ble.h"
 #endif
