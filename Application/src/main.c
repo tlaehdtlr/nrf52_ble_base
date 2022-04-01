@@ -157,7 +157,6 @@ int main(void)
     // Initialize.
     log_init();
     timers_init();
-    cli_start();
 
     /* button, led disable */
     // buttons_leds_init();
@@ -170,6 +169,7 @@ int main(void)
     conn_params_init();
     peer_manager_init();
 
+    cli_start();
     // Start execution.
     NRF_LOG_INFO("Template example started.");
     application_timers_start();
