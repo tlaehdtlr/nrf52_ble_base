@@ -1,4 +1,4 @@
-#ifnedf __CUSTOM_BOARD_H__
+#ifndef __CUSTOM_BOARD_H__
 #define __CUSTOM_BOARD_H__
 
 #include "nrf_gpio.h"
@@ -12,8 +12,8 @@
     <4294967295=> Not connected
 */
 
-#define RX_PIN_NUMBER       8
-#define TX_PIN_NUMBER       6
+#define MMI_UART_RX_PIN_NUMBER       8
+#define MMI_UART_TX_PIN_NUMBER       6
 #define CTS_PIN_NUMBER      7
 #define RTS_PIN_NUMBER      5
 #define HWFC                true

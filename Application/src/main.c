@@ -140,6 +140,7 @@ static void power_management_init(void)
  */
 static void idle_state_handle(void)
 {
+    cli_process();
     if (NRF_LOG_PROCESS() == false)
     {
         nrf_pwr_mgmt_run();
@@ -156,6 +157,7 @@ int main(void)
     // Initialize.
     log_init();
     timers_init();
+    cli_start();
 
     /* button, led disable */
     // buttons_leds_init();
