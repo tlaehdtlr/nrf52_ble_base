@@ -69,6 +69,8 @@
 #include "base_gap.h"
 #include "base_gatt.h"
 
+#include "base_debug.h"
+
 #if 0
 #include "ble_hci.h"
 #include "ble_srv_common.h"
@@ -153,7 +155,7 @@ static void idle_state_handle(void)
 int main(void)
 {
     bool erase_bonds;
-
+    v_check_reset_reason();
     // Initialize.
     log_init();
     timers_init();

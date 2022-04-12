@@ -106,6 +106,7 @@
       <file file_name="../../src/base_gap.c" />
       <file file_name="../../src/base_gatt.c" />
       <file file_name="../../src/base_cmds.c" />
+      <file file_name="../../src/base_debug.c" />
 
     </folder>
     <folder Name="nRF_Segger_RTT">
