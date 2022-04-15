@@ -95,6 +95,7 @@
       <file file_name="$(NORDIC_SDK_PATH)/modules/nrfx/drivers/src/prs/nrfx_prs.c" />
       <file file_name="$(NORDIC_SDK_PATH)/modules/nrfx/drivers/src/nrfx_uart.c" />
       <file file_name="$(NORDIC_SDK_PATH)/modules/nrfx/drivers/src/nrfx_uarte.c" />
+      <file file_name="$(NORDIC_SDK_PATH)/modules/nrfx/drivers/src/nrfx_wdt.c" />
     </folder>
     <folder Name="Application">
       <file file_name="../../src/main.c" />
@@ -107,6 +108,7 @@
       <file file_name="../../src/base_gatt.c" />
       <file file_name="../../src/base_cmds.c" />
       <file file_name="../../src/base_debug.c" />
+      <file file_name="../../src/base_wdt.c" />
 
     </folder>
     <folder Name="nRF_Segger_RTT">

@@ -1,6 +1,6 @@
 #include "nrf_cli.h"
 #include "nrf_log.h"
-
+#include "base_wdt.h"
 
 #define UNKNOWN_PARAMETER     "unknown parameter: "
 
@@ -11,7 +11,8 @@
 static char* base_cmds_all[] =
 {
     "1. dongsik",
-    "2. challenge"
+    "2. challenge",
+    "3. wdt",
 };
 
 static void base_cmds_help(nrf_cli_t const * p_cli, size_t argc, char **argv)
@@ -147,4 +148,50 @@ static void base_cmds_challenge(nrf_cli_t const * p_cli, size_t argc, char **arg
 NRF_CLI_CMD_REGISTER(challenge, NULL, "", base_cmds_challenge);
 
 /* 2. challenge command end */
+
+
+/* 3. wdt command start
+    - test
+    - reason
+ */
+static void base_cmds_wdt_get_log(void)
+{
+    ;
+}
+
+
+static void base_cmds_wdt(nrf_cli_t const * p_cli, size_t argc, char **argv)
+{
+    ASSERT(p_cli);
+    ASSERT(p_cli->p_ctx && p_cli->p_iface && p_cli->p_name);
+    if (argc == 2)
+    {
+        if (strcmp(argv[1], "test") == 0)
+        {
+            nrf_cli_print(p_cli, "wdt error !!");
+            v_base_wdt_stop_feed();
+            return ;
+
+        }
+        else if (strcmp(argv[1], "log") == 0)
+        {
+            nrf_cli_print(p_cli, "get log !!");
+            base_cmds_wdt_get_log();
+            return ;
+        }
+    }
+    else
+    {
+        nrf_cli_print(p_cli, "wdt [arg1] \r\n"\
+                                "\t test \r\n"\
+                                "\t log \r\n");
+        return;
+    }
+
+    nrf_cli_error(p_cli, "please input correctly");
+}
+
+NRF_CLI_CMD_REGISTER(wdt, NULL, "", base_cmds_wdt);
+
+/* 3. wdt command end */
 

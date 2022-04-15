@@ -70,6 +70,7 @@
 #include "base_gatt.h"
 
 #include "base_debug.h"
+#include "base_wdt.h"
 
 #if 0
 #include "ble_hci.h"
@@ -159,7 +160,7 @@ int main(void)
     // Initialize.
     log_init();
     timers_init();
-
+    v_base_wdt_init();
     /* button, led disable */
     // buttons_leds_init();
     power_management_init();
@@ -179,10 +180,17 @@ int main(void)
     //advertising_start(erase_bonds);
     advertising_start(false);
     // Enter main loop.
+
     for (;;)
     {
         idle_state_handle();
+        /* if wdt timeout, feed */
+        if (get_wdt_feed_state())
+        {
+            v_base_wdt_feed();
+        }
     }
+
 }
 
 
