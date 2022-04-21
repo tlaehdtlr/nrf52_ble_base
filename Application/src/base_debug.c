@@ -1,8 +1,8 @@
 #include "base_debug.h"
-#include <stdint.h>
 #include "nrf_log.h"
 #include "nrf_log_ctrl.h"
 #include "nrf52833.h"
+#include "nrf_delay.h"
 
 /*
     reset cause
@@ -109,6 +109,8 @@ void app_error_fault_handler(uint32_t id, uint32_t pc, uint32_t info)
     }
 
     UNUSED_VARIABLE(err_log);
+
+    nrf_delay_ms(1000);
     NVIC_SystemReset();
     // while (0);
 }
