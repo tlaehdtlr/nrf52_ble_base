@@ -1,6 +1,8 @@
 #include "nrf_cli.h"
 #include "nrf_log.h"
 #include "base_wdt.h"
+#include "base_debug.h"
+#include "app_error.h"
 
 #define UNKNOWN_PARAMETER     "unknown parameter: "
 
@@ -12,7 +14,7 @@ static char* base_cmds_all[] =
 {
     "1. dongsik",
     "2. challenge",
-    "3. wdt",
+    "3. error",
 };
 
 static void base_cmds_help(nrf_cli_t const * p_cli, size_t argc, char **argv)
@@ -150,48 +152,39 @@ NRF_CLI_CMD_REGISTER(challenge, NULL, "", base_cmds_challenge);
 /* 2. challenge command end */
 
 
-/* 3. wdt command start
-    - test
-    - reason
+/* 3. error command start
+    - wdt
+    - app
  */
-static void base_cmds_wdt_get_log(void)
-{
-    ;
-}
 
-
-static void base_cmds_wdt(nrf_cli_t const * p_cli, size_t argc, char **argv)
+static void base_cmds_error(nrf_cli_t const * p_cli, size_t argc, char **argv)
 {
     ASSERT(p_cli);
     ASSERT(p_cli->p_ctx && p_cli->p_iface && p_cli->p_name);
     if (argc == 2)
     {
-        if (strcmp(argv[1], "test") == 0)
+        if (strcmp(argv[1], "wdt") == 0)
         {
-            nrf_cli_print(p_cli, "wdt error !!");
-            v_base_wdt_stop_feed();
+            while(1);
             return ;
-
         }
-        else if (strcmp(argv[1], "log") == 0)
+        else if (strcmp(argv[1], "app") == 0)
         {
-            nrf_cli_print(p_cli, "get log !!");
-            base_cmds_wdt_get_log();
+            APP_ERROR_CHECK(1);
             return ;
         }
     }
     else
     {
-        nrf_cli_print(p_cli, "wdt [arg1] \r\n"\
-                                "\t test \r\n"\
-                                "\t log \r\n");
+        nrf_cli_print(p_cli, "error [arg1] \r\n"\
+                                "\t wdt \r\n"\
+                                "\t app \r\n");
         return;
     }
 
     nrf_cli_error(p_cli, "please input correctly");
 }
 
-NRF_CLI_CMD_REGISTER(wdt, NULL, "", base_cmds_wdt);
+NRF_CLI_CMD_REGISTER(error, NULL, "", base_cmds_error);
 
-/* 3. wdt command end */
-
+/* 3. error command end */

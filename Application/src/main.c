@@ -156,7 +156,7 @@ static void idle_state_handle(void)
 int main(void)
 {
     bool erase_bonds;
-    v_check_reset_reason();
+    v_debug_check_reset_reason();
     // Initialize.
     log_init();
     timers_init();

@@ -6,6 +6,7 @@
 #include "nrf_drv_clock.h"
 #include "nrf_log.h"
 #include "nrf_log_ctrl.h"
+#include "base_debug.h"
 
 
 nrf_drv_wdt_channel_id m_base_wdt_channel_id;
@@ -42,8 +43,8 @@ static void v_wdt_feed_timer_timeout_handler(void * p_context)
 
 static void wdt_event_handler(void)
 {
-    NRF_LOG_ERROR("wdt event handler ");
     //NOTE: The max amount of time we can spend in WDT interrupt is two cycles of 32768[Hz] clock - after that, reset occurs
+    v_debug_store_log();
 }
 
 
