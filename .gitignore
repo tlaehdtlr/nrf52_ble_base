@@ -2,3 +2,6 @@ Application/build/ses/Output
 Application/build/ses/*emSession
 Application/build/ses/*.jlink
 .vscode
+Bootloader/build/ses/Output
+Bootloader/build/ses/*emSession
+Bootloader/build/ses/*.jlink
