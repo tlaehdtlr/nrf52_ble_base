@@ -5,3 +5,5 @@ Application/build/ses/*.jlink
 Bootloader/build/ses/Output
 Bootloader/build/ses/*emSession
 Bootloader/build/ses/*.jlink
+*.hex
+*.zip

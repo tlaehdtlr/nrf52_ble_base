@@ -28,7 +28,7 @@
 - Application
   - nRF5_SDK_17.0.0_9d13099\examples\ble_peripheral\ble_app_template\pca10056\s140
 - bootloader
-  - nRF5_SDK_17.0.0_9d13099\examples\ble_peripheral\ble_app_buttonless_dfu\pca10056\s140
+  - nRF5_SDK_17.0.0_9d13099\examples\dfu\secure_bootloader\pca10100_s140_ble
 - Code from SDK in a local directory
   - absolute path , SEGGER options global macros (NORDIC_SDK_PATH)
 
@@ -41,12 +41,7 @@
     - armgcc
     - config
     - ses
-    - dfu
-      - secure_bootloader.hex
-      - key.pem
-      - softdevice.hex
-      - setting.hex
-      - nrfutil.exe
-      - dfu.bat
 - Bootloader
   - src
+- common
+  - dfu

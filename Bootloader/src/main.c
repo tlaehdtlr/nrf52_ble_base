@@ -49,7 +49,7 @@
 #include <stdint.h>
 #include "boards.h"
 #include "nrf_mbr.h"
-#include "nrf_bootloader.h"
+#include "base_bootloader.h"
 #include "nrf_bootloader_app_start.h"
 #include "nrf_bootloader_dfu_timers.h"
 #include "nrf_dfu.h"
@@ -65,6 +65,7 @@ static void on_error(void)
 {
     NRF_LOG_FINAL_FLUSH();
 
+    nrf_delay_ms(500);
 #if NRF_MODULE_ENABLED(NRF_LOG_BACKEND_RTT)
     // To allow the buffer to be flushed by the host.
     nrf_delay_ms(100);
@@ -82,10 +83,39 @@ void app_error_handler(uint32_t error_code, uint32_t line_num, const uint8_t * p
     on_error();
 }
 
+typedef struct error_log
+{
+    uint32_t        fault_id;
+    uint32_t        pc;
+    uint32_t        error_info;
+    assert_info_t * p_assert_info;
+    error_info_t  * p_error_info;
+    ret_code_t      err_code;
+    uint32_t        line_num;
+    const uint8_t * p_file_name;
+} temp_error_log_t;
 
+temp_error_log_t t_err_log;
 void app_error_fault_handler(uint32_t id, uint32_t pc, uint32_t info)
 {
     NRF_LOG_ERROR("Received a fault! id: 0x%08x, pc: 0x%08x, info: 0x%08x", id, pc, info);
+    switch (id)
+    {
+        case NRF_FAULT_ID_SDK_ASSERT:
+            t_err_log.p_assert_info = (assert_info_t*)info;
+            t_err_log.line_num      = t_err_log.p_assert_info->line_num;
+            t_err_log.p_file_name   = t_err_log.p_assert_info->p_file_name;
+            NRF_LOG_INFO("[NRF_FAULT_ID_SDK_ASSERT] \r\n === %s , %u line ===", t_err_log.p_file_name , t_err_log.line_num);
+            break;
+
+        case NRF_FAULT_ID_SDK_ERROR:
+            t_err_log.p_error_info = (error_info_t*)info;
+            t_err_log.err_code     = t_err_log.p_error_info->err_code;
+            t_err_log.line_num     = t_err_log.p_error_info->line_num;
+            t_err_log.p_file_name  = t_err_log.p_error_info->p_file_name;
+            NRF_LOG_INFO("[NRF_FAULT_ID_SDK_ERROR] \r\n === %s , %u line ===", t_err_log.p_file_name , t_err_log.line_num);
+            break;
+    }
     on_error();
 }
 
@@ -108,7 +138,7 @@ static void dfu_observer(nrf_dfu_evt_type_t evt_type)
         case NRF_DFU_EVT_DFU_INITIALIZED:
             bsp_board_init(BSP_INIT_LEDS);
             bsp_board_led_on(BSP_BOARD_LED_0);
-            bsp_board_led_on(BSP_BOARD_LED_1);
+            bsp_board_led_on(BSP_BOARD_LED_3);
             bsp_board_led_off(BSP_BOARD_LED_2);
             break;
         case NRF_DFU_EVT_TRANSPORT_ACTIVATED:
@@ -141,8 +171,10 @@ int main(void)
     NRF_LOG_DEFAULT_BACKENDS_INIT();
 
     NRF_LOG_INFO("Inside main");
+    NRF_LOG_FLUSH();
 
-    ret_val = nrf_bootloader_init(dfu_observer);
+    ret_val = base_bootloader_init(dfu_observer);
+    NRF_LOG_FLUSH();
     APP_ERROR_CHECK(ret_val);
 
     NRF_LOG_FLUSH();

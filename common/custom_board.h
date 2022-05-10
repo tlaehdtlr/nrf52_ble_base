@@ -18,13 +18,14 @@
 #define RTS_PIN_NUMBER      5
 #define HWFC                true
 
-#define LEDS_NUMBER         2
+#define LEDS_NUMBER         0//2
 #define LED_1               13
 #define LED_2               14
 #define LEDS_LIST           { LED_1, LED_2 }
 #define LEDS_ACTIVE_STATE   0
 
-#define BUTTONS_NUMBER      2
+/* If use bsp_board_buttons in boards.c , BUTTONS_NUMBER is more than zero */
+#define BUTTONS_NUMBER      0//2
 #define BUTTON_1            11
 #define BUTTON_2            12
 #define BUTTONS_LIST        { BUTTON_1, BUTTON_2 }
